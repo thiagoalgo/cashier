@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscribedController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,21 +16,12 @@ Route::post('/subscription/store', [SubscriptionController::class, 'store'])->mi
 Route::get('/subscription/success', [SubscriptionController::class, 'success'])->middleware('auth')->name('subscription.success');
 Route::get('/subscription/cancel', [SubscriptionController::class, 'cancel'])->middleware('auth')->name('subscription.cancel');
 
-/*Route::get('/subscription/checkout', function (Request $request) {
-    $stripePriceId = 'price_1QlamAH8Rnnrgm85c7c97kS6';
+// Rota de teste para verificar se um usuário tem uma assinatura ativa.
 
-    return $request->user()
-        ->newSubscription('Assinatura mensal', $stripePriceId)
-        ->trialDays(7)
-        ->checkout([
-            'success_url' => route('subscription-success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('subscription-cancel'),
-            'metadata' => [
-                'price_id' => $stripePriceId,
-                'user_id' => $request->user()->id,
-            ],
-        ]);
-})->middleware('auth')->name('subscription-checkout');*/
+// Validação no Blade
+Route::get('/subscribed', [SubscribedController::class, 'index'])->middleware('auth')->name('subscribed');
+
+
 
 /*****************************************************
  * Rotas de exemplo para testar VENDAS com o Cashier
