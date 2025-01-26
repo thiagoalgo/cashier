@@ -34,6 +34,21 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('buy-product')" :active="request()->routeIs('buy-product')" wire:navigate>
+                        {{ __('Buy Product') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('buy-charge')" :active="request()->routeIs('buy-charge')" wire:navigate>
+                        {{ __('Buy Charge') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('subscription')" :active="request()->routeIs('subscription')" wire:navigate>
+                        {{ __('Subscription') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
