@@ -1,12 +1,39 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Cashier\Cashier;
 
 Route::view('/', 'welcome');
 
+/*****************************************************
+ * Rotas de exemplo para testar ASSINATURAS com o Cashier
+ *****************************************************/
+Route::get('/subscription', [SubscriptionController::class, 'index'])->middleware('auth')->name('subscription');
+Route::post('/subscription/store', [SubscriptionController::class, 'store'])->middleware('auth')->name('subscription.store');
+Route::get('/subscription/success', [SubscriptionController::class, 'success'])->middleware('auth')->name('subscription.success');
+Route::get('/subscription/cancel', [SubscriptionController::class, 'cancel'])->middleware('auth')->name('subscription.cancel');
 
+/*Route::get('/subscription/checkout', function (Request $request) {
+    $stripePriceId = 'price_1QlamAH8Rnnrgm85c7c97kS6';
+
+    return $request->user()
+        ->newSubscription('Assinatura mensal', $stripePriceId)
+        ->trialDays(7)
+        ->checkout([
+            'success_url' => route('subscription-success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('subscription-cancel'),
+            'metadata' => [
+                'price_id' => $stripePriceId,
+                'user_id' => $request->user()->id,
+            ],
+        ]);
+})->middleware('auth')->name('subscription-checkout');*/
+
+/*****************************************************
+ * Rotas de exemplo para testar VENDAS com o Cashier
+ *****************************************************/
 Route::get('/buy/product', function () {
     return view('buy-product');
 })->middleware('auth')->name('buy-product');
@@ -14,10 +41,6 @@ Route::get('/buy/product', function () {
 Route::get('/buy/charge', function () {
     return view('buy-charge');
 })->middleware('auth')->name('buy-charge');
-
-Route::get('/subscription', function () {
-    return view('subscription');
-})->middleware('auth')->name('subscription');
 
 Route::get('/checkout', function (Request $request) {
     $stripePriceId = 'price_1QfWrpH8Rnnrgm852YRiGHJ4';
@@ -51,7 +74,6 @@ Route::get('/checkout-charge', function (Request $request) {
             ],
         ]);
 })->middleware('auth')->name('checkout-charge');
-
 
 Route::get('/checkout/success', function (Request $request) {
     $sessionId = $request->get('session_id');
