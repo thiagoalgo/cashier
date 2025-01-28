@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SubscribedController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Middleware\SubscribedMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Cashier\Cashier;
@@ -20,6 +21,9 @@ Route::get('/subscription/cancel', [SubscriptionController::class, 'cancel'])->m
 
 // Validação no Blade
 Route::get('/subscribed', [SubscribedController::class, 'index'])->middleware('auth')->name('subscribed');
+
+// Validação no Middleware
+Route::get('/subscribed/middleware', [SubscribedController::class, 'subscribedMiddleware'])->middleware(['auth', SubscribedMiddleware::class])->name('subscribed.middleware');
 
 
 

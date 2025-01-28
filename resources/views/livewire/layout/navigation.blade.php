@@ -54,6 +54,12 @@ new class extends Component
                         {{ __('Is subscribed?') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('subscribed.middleware')" :active="request()->routeIs('subscribed.middleware')" wire:navigate>
+                        {{ __('Is subscribed (middleware)?') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
